@@ -1,0 +1,236 @@
+.prediction-form {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.prediction-form h2 {
+  color: #1e3a27;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.form-subtitle {
+  color: #556b5c;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.upload-zone {
+  width: 100%;
+  min-height: 240px;
+  border: 3px dashed #a2c4b0;
+  border-radius: 12px;
+  background-color: #f7faf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.upload-zone:hover {
+  border-color: #2e7d32;
+  background-color: #f0f7f2;
+}
+
+.upload-zone.active {
+  border-color: #2e7d32;
+  background-color: #e8f5e9;
+  transform: scale(1.02);
+}
+
+.upload-zone.has-preview {
+  border-style: solid;
+  border-color: #e2e8f0;
+  cursor: default;
+  background-color: white;
+  padding: 0;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.upload-prompt {
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-icon {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.upload-zone:hover .upload-icon {
+  transform: scale(1.15) translateY(-5px);
+}
+
+.upload-text-main {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2e4a36;
+  margin: 0 0 5px 0;
+}
+
+.upload-text-sub {
+  font-size: 0.95rem;
+  color: #6a8c75;
+  margin: 0 0 12px 0;
+}
+
+.upload-hint {
+  font-size: 0.8rem;
+  color: #92b59d;
+  background-color: #eef5f0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Image Preview Styles */
+.preview-container {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #f8fafc;
+}
+
+.btn-clear {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.btn-clear:hover {
+  background: rgba(220, 38, 38, 0.9);
+  transform: scale(1.05);
+}
+
+/* Tips styling */
+.tip-box {
+  background-color: #f3f9f5;
+  border-left: 4px solid #4caf50;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.tip-box h4 {
+  margin: 0 0 10px 0;
+  color: #1b5e20;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tip-box ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tip-box li {
+  color: #2e4d35;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.tip-box li:last-child {
+  margin-bottom: 0;
+}
+
+/* Action buttons */
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.btn-submit {
+  flex-grow: 1;
+}
+
+@media (max-width: 640px) {
+  .button-group {
+    flex-direction: column-reverse;
+  }
+  .btn {
+    width: 100%;
+  }
+}

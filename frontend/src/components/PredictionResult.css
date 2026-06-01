@@ -1,0 +1,277 @@
+.prediction-result {
+  margin-top: 30px;
+  animation: slideUp 0.4s ease-out;
+  text-align: left;
+}
+
+/* Diagnosis Banner Card */
+.diagnosis-card {
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.diagnosis-card.healthy {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.2);
+}
+
+.diagnosis-card.infected {
+  background: linear-gradient(135deg, #d84315 0%, #bf360c 100%);
+  box-shadow: 0 10px 25px rgba(216, 67, 21, 0.2);
+}
+
+.diagnosis-status {
+  z-index: 2;
+}
+
+.status-badge {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.diagnosis-card h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 5px 0;
+  line-height: 1.1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.disease-name {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  opacity: 0.95;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.confidence-label {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.confidence-label strong {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.diagnosis-icon-large {
+  font-size: 5rem;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 1;
+  transform: rotate(15deg);
+}
+
+/* Treatment Card & Database */
+.treatment-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  margin-bottom: 25px;
+}
+
+.card-section {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.card-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.card-section h3 {
+  color: #1e3a27;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-text {
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.remedy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.remedy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.remedy-item:last-child {
+  margin-bottom: 0;
+}
+
+.remedy-bullet {
+  color: #2e7d32;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.remedy-text {
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Match Chart display */
+.match-chart-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  margin-bottom: 25px;
+}
+
+.match-chart-card h3 {
+  color: #1e3a27;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+}
+
+.predictions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.prediction-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.prediction-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.prediction-label {
+  color: #1e293b;
+}
+
+.prediction-value {
+  color: #475569;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #f1f5f9;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 5px;
+  width: 0; /* Animated */
+  transition: width 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+/* Advanced technical block */
+.advanced-toggle-area {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.btn-toggle-advanced {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-toggle-advanced:hover {
+  color: #334155;
+  background-color: #f1f5f9;
+}
+
+.raw-result {
+  margin-top: 15px;
+  text-align: left;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.raw-result h3 {
+  color: #475569;
+  font-size: 0.95rem;
+  margin: 0 0 8px 0;
+}
+
+.result-code {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  margin: 0;
+  max-height: 250px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

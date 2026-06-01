@@ -1,0 +1,40 @@
+# Backend
+backend/__pycache__/
+backend/.pytest_cache/
+backend/.env
+backend/venv/
+backend/*.egg-info/
+backend/.DS_Store
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models
+*.h5
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.ckpt
