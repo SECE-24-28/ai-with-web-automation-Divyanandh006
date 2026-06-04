@@ -1,67 +1,157 @@
-# Full-Stack AI Chatbot (Gemini)
+# AI Chatbot (Gemini)
 
-A full-stack AI chatbot with a React + Vite frontend and an Express + SQLite backend powered by Google Gemini.
+A lightweight full-stack AI chat application built with React + Vite (frontend) and Express + SQLite (backend). Messages are generated via Google Gemini using `@google/generative-ai`.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Node.js](https://img.shields.io/badge/Node-16%2B-green)](#) [![Status](https://img.shields.io/badge/status-development-yellowgreen)](#)
+
+A compact demo project intended for learning and prototyping local AI chat integrations.
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Environment variables](#environment-variables)
+- [Running locally (development)](#running-locally-development)
+- [Usage examples](#usage-examples)
+- [API overview](#api-overview)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
-- **Authentication** – Register, login, and email verification with 6-digit OTP
-- **Multi-Chat Sessions** – Create, rename, delete, and switch between chats
-- **AI Responses** – Powered by Google Gemini (`gemini-2.0-flash`)
-- **Code Highlighting** – Code block rendering with copy-to-clipboard
-- **Responsive UI** – Glassmorphism dark theme, works on mobile and desktop
-- **Persistent Storage** – SQLite database with WAL mode
+- Email registration with 6-digit verification (SMTP optional, falls back to console)
+- JWT-based authentication for protected routes
+- Create / rename / delete chats with per-chat message history
+- AI responses via Google Gemini (`GEMINI_API_KEY`)
 
-## Quick Start
+## Tech stack
 
-### 1. Backend
+- Backend: Node.js, Express, `better-sqlite3`, `@google/generative-ai`
+- Frontend: React, Vite
 
-```bash
-cd chatbot/backend
-npm install
-# Add your Gemini API key to .env (see below)
-npm run dev
+## Prerequisites
+
+- Node.js (16+ recommended)
+- npm or yarn
+
+## Environment variables
+Create a `.env` file in `backend/` (see [backend/server.js](backend/server.js#L1) and [backend/routes/messages.js](backend/routes/messages.js#L1)). A sample is provided at `backend/.env.example`.
+
+Example keys (do not commit real secrets):
+
 ```
-
-The backend runs on **http://localhost:3002**
-
-### 2. Frontend
-
-```bash
-cd chatbot/frontend
-npm install
-npm run dev
-```
-
-Open **http://localhost:5173**
-
-## Environment Variables (backend/.env)
-
-```env
-GEMINI_API_KEY=your_google_gemini_api_key_here
 PORT=3002
+JWT_SECRET=your_jwt_secret_here
+GEMINI_API_KEY=your_google_gemini_api_key_here
 
-# Optional: SMTP for real email delivery (omit to use dev console fallback)
-# SMTP_HOST=smtp.gmail.com
-# SMTP_PORT=587
-# SMTP_SECURE=false
-# SMTP_USER=you@gmail.com
-# SMTP_PASS=your_app_password
+# Optional SMTP settings for real email delivery (omit to use console fallback)
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=you@example.com
+SMTP_PASS=your_smtp_password
+SMTP_SECURE=false
 ```
 
-> **Dev mode:** If SMTP is not configured, verification codes are printed to the backend terminal console.
+- If SMTP is not configured verification codes are printed to the backend console for development convenience.
+- The backend creates a local SQLite DB file `chatbot.db` inside `backend/` at runtime (see [backend/db.js](backend/db.js#L1)).
 
-## API Endpoints
+## Running locally (development)
 
-| Method | Route                          | Description               |
-|--------|-------------------------------|---------------------------|
-| POST   | /api/auth/register            | Register a new user       |
-| POST   | /api/auth/verify              | Verify email with OTP     |
-| POST   | /api/auth/login               | Login and receive JWT     |
-| POST   | /api/auth/resend-verification | Resend OTP code           |
-| GET    | /api/chats                    | List all user chats       |
-| POST   | /api/chats                    | Create a new chat         |
-| PATCH  | /api/chats/:id                | Rename a chat             |
-| DELETE | /api/chats/:id                | Delete a chat             |
-| GET    | /api/messages/:chatId         | Get messages for a chat   |
-| POST   | /api/messages/:chatId         | Send a message (AI reply) |
-| GET    | /api/health                   | Backend health check      |
+1. Backend
+
+```bash
+cd backend
+npm install
+# start with auto-reload
+npm run dev
+```
+
+The backend listens on `http://localhost:3002` by default.
+
+2. Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend dev server (Vite) typically runs at `http://localhost:5173` and communicates with the backend at `http://localhost:3002/api` (see [frontend/src/services/api.js](frontend/src/services/api.js#L1)).
+
+## Usage examples
+
+Register a user, verify, login, then send a message. Example flow using `curl`:
+
+1) Register
+
+```bash
+curl -X POST http://localhost:3002/api/auth/register \
+	-H "Content-Type: application/json" \
+	-d '{"name":"Alice","email":"alice@example.com","password":"password123"}'
+```
+
+2) (Check backend console for verification code or receive email if SMTP configured)
+
+3) Verify
+
+```bash
+curl -X POST http://localhost:3002/api/auth/verify \
+	-H "Content-Type: application/json" \
+	-d '{"email":"alice@example.com","code":"123456"}'
+```
+
+4) Login
+
+```bash
+curl -X POST http://localhost:3002/api/auth/login \
+	-H "Content-Type: application/json" \
+	-d '{"email":"alice@example.com","password":"password123"}'
+```
+
+5) Send a message (replace `TOKEN` and `CHAT_ID`)
+
+```bash
+curl -X POST http://localhost:3002/api/messages/CHAT_ID \
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer TOKEN" \
+	-d '{"content":"Hello, AI!"}'
+```
+
+## API overview
+
+Key endpoints (base `/api`):
+
+- `POST /api/auth/register` — register a new user
+- `POST /api/auth/verify` — verify email with OTP
+- `POST /api/auth/login` — login and receive JWT
+- `POST /api/auth/resend-verification` — resend OTP
+- `GET /api/chats` — list user chats
+- `POST /api/chats` — create chat
+- `PATCH /api/chats/:id` — rename chat
+- `DELETE /api/chats/:id` — delete chat
+- `GET /api/messages/:chatId` — get messages
+- `POST /api/messages/:chatId` — send message / receive AI reply
+
+## Screenshot / Demo
+
+Add a screenshot or GIF to `frontend/public/screenshot.png` and embed it here:
+
+![App screenshot](frontend/public/screenshot.png)
+
+## Notes & security
+
+- Do not commit `.env` or any secret values. Keep `JWT_SECRET` and `GEMINI_API_KEY` private.
+- This project is intended for learning and prototyping. Harden auth, rate limiting, input validation, and secrets handling before using in production.
+
+## Contributing
+
+Contributions are welcome — open an issue or submit a pull request with a clear description and tests where applicable. See `CONTRIBUTING.md` (optional).
+
+## License
+
+This project is available under the MIT License — see the `LICENSE` file.
+
+## Contact
+
+Open an issue or contact the repository owner for questions.
