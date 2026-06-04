@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    "chatbot.db",
+    "chatbot.db-wal",
+    "chatbot.db-shm",
+    "chatbot.db-journal"
+  ]
+}

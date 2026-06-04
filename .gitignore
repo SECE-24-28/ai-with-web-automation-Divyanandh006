@@ -1,0 +1,14 @@
+node_modules/
+.venv/
+.env
+*.db
+*.sqlite
+dist/
+build/
+.DS_Store
+frontend/node_modules/
+backend/node_modules/
+chatbot/frontend/node_modules/
+chatbot/backend/node_modules/
+chatbot/backend/.env
+chatbot/backend/chatbot.db
